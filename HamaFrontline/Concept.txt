@@ -1,7 +1,7 @@
 Moving Frontline - Without interference from the players Blue is supposed to loose!
 Somewhat dynamic Engagements - The battle shouldn't always take place at the exact same place!
-RED CAS - Helicopters over the area
-RED Falnking attacks (through the mountains)
+
+RED Flanking attacks (through the mountains)
 Cargo events - Special equipment being brought forward
 
 If red loses that should have some serious consequences - like a big SAM in range of Hatay!
@@ -9,3 +9,5 @@ If red loses that should have some serious consequences - like a big SAM in rang
 Helicopter CAS
 
 Progression via Zones
+- how does one attack a zone?
+- does one set up an FSM to move combat between zones?

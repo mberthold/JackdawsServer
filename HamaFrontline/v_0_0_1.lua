@@ -1,4 +1,17 @@
-MESSAGE:New( "HamaFrontline v01", 35, "INFO" ):ToAll()
+MESSAGE:New( "HamaFrontline v_0_0_1", 35, "INFO" ):ToAll()
+
+assert(loadfile("D:\\MissionBuilding\\JackdawsServer\\HamaFrontline\\zone_playground.lua"))()
+
+-- Define Zones - All Zones should start with HamFront
+local poly_groups = GROUP:FindAllByMatching('HamFront')
+
+local ham_front_zones = {}
+
+--for n, group in ipairs(poly_groups) do
+ --   ham_front_zones.insert(group)
+--end
+
+
 
 -- Templategroups RED
 local templates_red_ground_log = {'RedGroundLog-1'}
@@ -24,16 +37,16 @@ for n, x in ipairs(templates_red_ground_log) do
 end
 
 local function set_supression_red(group)
-    MESSAGE:New( "Rowing with one hand!", 35, "INFO" ):ToAll()
+    --MESSAGE:New( "Rowing with one hand!", 35, "INFO" ):ToAll()
     if group then
         
         MESSAGE:New( group.GroupName, 35, "INFO" ):ToAll()
         local supression = SUPPRESSION:New(group)
-        supression:Takecover(true)
-        supression:Fallback(true)
-        supression:SetFallbackDistance(200)
-        supression:__Start(5)
-        MESSAGE:New( 'Did the suppression... hopefully.', 35, "INFO" ):ToAll()
+        :Takecover(true)
+        :Fallback(true)
+        :SetFallbackDistance(200)
+        :__Start(5)
+        --MESSAGE:New( 'Did the suppression... hopefully.', 35, "INFO" ):ToAll()
     else 
         if group == nil then
             MESSAGE:New( 'group is nil!', 35, "INFO" ):ToAll()
@@ -75,7 +88,7 @@ Spawn_Blue_Light = SPAWN:New(templates_blue_ground_log[1])
     :InitLimit(50, 0)
     :InitRandomizeRoute( 1, 1, 3000 )
     :InitRandomizeTemplate( templates_blue_main )
-    :SpawnScheduled(5, .5)
+    :SpawnScheduled(60, .5)
 
 
 MESSAGE:New( "HamaFrontline v01 - COMPLETED", 35, "INFO" ):ToAll()
