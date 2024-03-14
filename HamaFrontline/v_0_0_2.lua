@@ -1,4 +1,4 @@
-MESSAGE:New( "HamaFrontline v_0_0_1", 35, "INFO" ):ToAll()
+MESSAGE:New( "HamaFrontline v_0_0_2", 35, "INFO" ):ToAll()
 
 --assert(loadfile("D:\\MissionBuilding\\JackdawsServer\\HamaFrontline\\zone_playground.lua"))()
 
@@ -41,18 +41,38 @@ end
 -- Designate the route!
 
 local function set_random_dest(group, origin)
-    local random_point = frontline_zone_1:GetRandomPointVec2()
-    local random_coord = COORDINATE:NewFromVec2(random_point)
+
+    local random_point = frontline_zone_1:GetRandomPointVec3()
+    local random_coord = COORDINATE:NewFromVec3(random_point)
+    random_coord:SmokeRed()
+    random_coord:MarkToAll('foobar!')
     random_point:SmokeBlue() -- Mark it on the map delete in the future!
-    MESSAGE:New( tostring(random_point.x), 35, "Zone X" ):ToAll()
-    MESSAGE:New( tostring(random_point.y), 35, "Zone Y" ):ToAll()
-    group:RouteGroundOnRoad(random_coord, 15, 3)
+    group:RouteGroundOnRoad(random_coord, 50)
 
 end
 
+local function set_supression_red(group)
+    --MESSAGE:New( "Rowing with one hand!", 35, "INFO" ):ToAll()
+    if group then
+        
+        MESSAGE:New( group.GroupName, 35, "INFO" ):ToAll()
+        local supression = SUPPRESSION:New(group)
+        :Takecover(true)
+        :Fallback(true)
+        :SetFallbackDistance(200)
+        :__Start(5)
+        --MESSAGE:New( 'Did the suppression... hopefully.', 35, "INFO" ):ToAll()
+    else 
+        if group == nil then
+            MESSAGE:New( 'group is nil!', 35, "INFO" ):ToAll()
+        end
+    end
+end
+
+
 local function on_spawn(group)
     local current_position = group:GetCoordinate()
-    --set_supression_red(group)
+    set_supression_red(group)
     set_random_dest(group, current_position)
 end
 
@@ -60,7 +80,7 @@ Spawn_Red_Light = SPAWN:New(templates_red_ground_log[1])
     :InitLimit(50, 0)
     :InitRandomizeTemplate( templates_red_main )
     :OnSpawnGroup(on_spawn)
-    :SpawnScheduled(60, .5)
+    :SpawnScheduled(60, .2)
 
 -- ################### --
 
